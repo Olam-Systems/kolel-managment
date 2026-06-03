@@ -42,7 +42,7 @@ export const generateReport = (
       aggregation[result.name].monthsCount += 1;
       
       // Fix: Explicitly type reduce parameters to avoid unknown type errors
-      const activeDays = result.details?.filter(d => Object.values(d.sederHours).reduce((a: number, b: number) => a + b, 0) > 0 && d.rawTime !== 'חופש').length || 0;
+      const activeDays = result.details?.filter(d => Object.values(d.sederHours ?? {}).reduce((a: number, b: number) => a + b, 0) > 0 && d.rawTime !== 'חופש').length || 0;
       aggregation[result.name].totalTargetHours += activeDays * dailyTarget;
     }
   }
